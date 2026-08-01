@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InternShield | Elite Cyber Security Solutions</title>
+    <meta name="description" content="InternShield - MSME Registered Cyber Security, Training, and R&D based in Jaipur, Rajasthan.">
+    
+    <!-- Open Graph for SEO -->
+    <meta property="og:title" content="InternShield | Cyber Security">
+    <meta property="og:description" content="MSME Registered Cyber Security, based in Jaipur.">
+    <meta property="og:type" content="website">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Playfair Display (Serif) & Inter (Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            black: '#050505',
+                            white: '#FAFAFA',
+                            gray: '#888888',
+                            accent: '#222222'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #FAFAFA;
+            color: #050505;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        ::selection {
+            background-color: #050505;
+            color: #FAFAFA;
+        }
+
+        /* --- ONE-LINE ART SVG SYSTEM --- */
+        /* This leverages XML/SVG path properties to create a drawing effect */
+        
+        .line-art {
+            stroke: #050505;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        
+        /* Thin elegant lines for details */
+        .stroke-thin { stroke-width: 1; }
+        /* Thicker lines for primary silhouettes */
+        .stroke-thick { stroke-width: 2.5; }
+
+        /* The drawing animation */
+        @keyframes drawContinuousLine {
+            to { stroke-dashoffset: 0; }
+        }
+
+        /* Initial state for JS to trigger */
+        .svg-draw-ready path, .svg-draw-ready circle, .svg-draw-ready rect {
+            /* We will set dasharray dynamically in JS based on path length, 
+               but fallback to a large number here just in case */
+            stroke-dasharray: 4000;
+            stroke-dashoffset: 4000;
+        }
+
+        .svg-animate path, .svg-animate circle, .svg-animate rect {
+            animation: drawContinuousLine 4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        /* Subtle delays for complex multi-path SVGs to simulate one continuous pen */
+        .svg-animate path:nth-child(2) { animation-delay: 1.5s; }
+        .svg-animate path:nth-child(3) { animation-delay: 2.5s; }
+
+        /* --- SCROLL REVEAL UTILITIES --- */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        
+        .reveal-up.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+
+        /* Custom Noise Texture Overlay for Premium Feel */
+        .bg-noise {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body class="relative">
+    
+    <div class="bg-noise"></div>
+
+    <nav class="fixed w-full top-0 z-50 bg-brand-white/80 backdrop-blur-md border-b border-brand-black/5 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="flex justify-between items-center h-20">
+                <!-- Brand / Logo (Abstract Line Shield) -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <svg class="w-8 h-8 transition-transform group-hover:scale-110" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <path class="line-art stroke-thick" d="M50,10 C50,10 85,25 85,55 C85,80 50,95 50,95 C50,95 15,80 15,55 C15,25 50,10 50,10 Z M50,30 L50,75 M35,52.5 L65,52.5" />
+                    </svg>
+                    <span class="font-serif text-xl font-bold tracking-widest uppercase">InternShield</span>
+                </a>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#about" class="text-sm font-medium tracking-widest uppercase hover:text-brand-gray transition-colors">Vision</a>
+                    <a href="#credentials" class="text-sm font-medium tracking-widest uppercase hover:text-brand-gray transition-colors">Credentials</a>
+                    <a href="#contact" class="px-6 py-2 border-2 border-brand-black text-brand-black text-sm font-bold uppercase tracking-widest hover:bg-brand-black hover:text-brand-white transition-colors duration-300">
+                        Contact Us
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden p-2 text-brand-black focus:outline-none" id="mobile-menu-btn">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div class="md:hidden fixed inset-0 bg-brand-white z-40 transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col justify-center items-center gap-8" id="mobile-drawer">
+            <button class="absolute top-6 right-6 p-2 text-brand-black" id="close-menu-btn">
+                <i class="fa-solid fa-xmark text-3xl"></i>
+            </button>
+            <a href="#about" class="mobile-link text-2xl font-serif tracking-widest uppercase">Vision</a>
+            <a href="#credentials" class="mobile-link text-2xl font-serif tracking-widest uppercase">Credentials</a>
+            <a href="#contact" class="mobile-link text-2xl font-serif tracking-widest uppercase">Contact</a>
+        </div>
+    </nav>
+
+    <header class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        
+        <!-- Large Background Silhouette Line Art (XML/SVG) -->
+        <!-- This represents a human profile silhouette morphing into a technological network, drawn in one stroke -->
+        <div class="absolute inset-0 z-0 flex items-center justify-center opacity-10 pointer-events-none">
+            <svg class="w-full max-w-4xl h-auto svg-draw-ready" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+                <!-- Continuous Face Profile to Cyber Node Path -->
+                <path class="line-art stroke-thin" d="
+                    M 250,50 
+                    C 150,50 100,100 100,200
+                    C 100,250 120,280 140,300
+                    C 160,320 150,380 150,450
+                    L 350,450
+                    C 350,380 340,320 360,300
+                    C 380,280 400,250 400,200
+                    C 400,100 350,50 250,50 Z
+                    
+                    M 250,50
+                    C 250,50 300,120 280,180
+                    C 260,240 320,250 340,300
+                    
+                    M 250,50
+                    C 250,50 200,120 220,180
+                    C 240,240 180,250 160,300
+                    
+                    M 250,220
+                    C 250,220 250,300 250,450
+                    
+                    M 180,250 L 320,250
+                    M 220,180 L 280,180
+                "/>
+            </svg>
+        </div>
+
+        <div class="max-w-5xl mx-auto px-6 md:px-12 relative z-10 text-center flex flex-col items-center">
+            
+            <!-- Central One-Line Art Element -->
+            <div class="mb-12 w-48 h-48 md:w-64 md:h-64 relative">
+                <svg class="w-full h-full svg-draw-ready" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Abstract continuous line representing a shield, brain, and fingerprint -->
+                    <path class="line-art stroke-thick" d="
+                        M 100,20
+                        C 140,20 180,40 180,90
+                        C 180,140 100,180 100,180
+                        C 100,180 20,140 20,90
+                        C 20,40 60,20 100,20
+                        C 100,20 100,50 70,70
+                        C 40,90 40,120 70,140
+                        C 100,160 130,120 130,90
+                        C 130,60 100,50 100,20
+                    "/>
+                </svg>
+            </div>
+
+            <div class="reveal-up">
+                <h2 class="text-xs font-bold tracking-[0.3em] uppercase text-brand-gray mb-6">A Vidit Shringi Enterprise</h2>
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-serif font-bold leading-tight tracking-tight mb-8">
+                    Artistry in <br>
+                    <span class="italic font-light">Cyber Architecture.</span>
+                </h1>
+                <p class="text-lg md:text-xl text-brand-gray max-w-2xl mx-auto leading-relaxed font-light mb-12">
+                    We sculpt secure infrastructures with the precision of a single, continuous line. Minimalist in approach, impenetrable in execution.
+                </p>
+                <div class="w-px h-24 bg-brand-black mx-auto"></div>
+            </div>
+        </div>
+    </header>
+
+    <section id="credentials" class="py-32 bg-brand-black text-brand-white relative overflow-hidden">
+        
+        <!-- Background Abstract Line Art -->
+        <div class="absolute right-[-10%] top-1/2 transform -translate-y-1/2 opacity-10 pointer-events-none">
+            <svg class="w-[800px] h-[800px] svg-draw-ready" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+                <!-- Abstract continuous topographical/network rings -->
+                <path class="line-art stroke-thin" stroke="#ffffff" d="
+                    M250,50 C360,50 450,140 450,250 C450,360 360,450 250,450 C140,450 50,360 50,250 C50,140 140,50 250,50 Z
+                    M250,100 C332,100 400,167 400,250 C400,332 332,400 250,400 C167,400 100,332 100,250 C100,167 167,100 250,100 Z
+                    M250,150 C305,150 350,194 350,250 C350,305 305,350 250,350 C194,350 150,305 150,250 C150,194 194,150 250,150 Z
+                    M250,50 L250,450 M50,250 L450,250
+                "/>
+            </svg>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                
+                <div class="reveal-up">
+                    <h3 class="text-xs font-bold tracking-[0.2em] uppercase text-brand-gray mb-6">Government Verified</h3>
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold mb-8 leading-tight">MSME Registered <br><span class="italic font-light">Entity</span></h2>
+                    
+                    <p class="text-brand-gray text-lg leading-relaxed mb-8">
+                        InternShield operates as an officially recognized Micro, Small & Medium Enterprise under the Government of India. This certification stands as a testament to our legitimacy, structural integrity, and commitment to delivering standardized, high-tier cyber security solutions and training.
+                    </p>
+
+                    <div class="flex items-center gap-4 text-sm tracking-widest uppercase font-bold border-l-2 border-brand-white pl-6 py-2">
+                        <i class="fa-solid fa-certificate text-xl"></i>
+                        <span>Udyam Registration Active</span>
+                    </div>
+                </div>
+
+                <div class="reveal-up delay-100 flex justify-center lg:justify-end">
+                    <!-- Elegant Government Stamp / Badge Graphic in One Line style -->
+                    <div class="relative w-72 h-72 flex items-center justify-center">
+                        <svg class="absolute inset-0 w-full h-full animate-[spin_30s_linear_infinite]" viewBox="0 0 200 200">
+                            <!-- Circular Text Path (XML) -->
+                            <path id="textPath" d="M 100, 100 m -70, 0 a 70,70 0 1,1 140,0 a 70,70 0 1,1 -140,0" fill="none" />
+                            <text fill="#ffffff" font-size="12" font-weight="bold" letter-spacing="3" class="uppercase font-sans">
+                                <textPath href="#textPath" startOffset="0%">
+                                    • MSME REGISTERED • GOVT OF INDIA • INTERNSHIELD • 
+                                </textPath>
+                            </text>
+                        </svg>
+                        
+                        <!-- Center Lion/Emblem abstract one-line -->
+                        <svg class="w-32 h-32 svg-draw-ready" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <path class="line-art stroke-thick" stroke="#ffffff" d="M50,20 L50,80 M30,40 L70,40 M40,60 L60,60 M20,20 L80,20 M20,80 L80,80 M10,50 L90,50"/>
+                            <circle cx="50" cy="50" r="45" class="line-art stroke-thin" stroke="#ffffff"/>
+                        </svg>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-32 bg-brand-white relative">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            
+            <div class="text-center mb-24 reveal-up">
+                <h2 class="text-4xl md:text-5xl font-serif font-bold mb-6">Our Competencies</h2>
+                <p class="text-brand-gray max-w-2xl mx-auto">Mastering the offensive and defensive dynamics of modern cyberspace through unified, elegant solutions.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 border-t border-brand-black/10 pt-16">
+                
+                <!-- Competency 1 -->
+                <div class="reveal-up group">
+                    <div class="h-32 w-32 mb-8 mx-auto md:mx-0 relative">
+                        <svg class="w-full h-full svg-draw-ready" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Minimalist Laptop / Terminal Line Art -->
+                            <path class="line-art stroke-thick" d="M20,70 L80,70 L80,30 L20,30 Z M10,70 L90,70 M30,50 L40,50 M45,50 L50,50" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold mb-4 border-b border-brand-black pb-4 inline-block">Offensive Security</h3>
+                    <p class="text-brand-gray text-sm leading-relaxed">
+                        Advanced penetration testing, vulnerability assessments, and simulated adversarial operations mapped to MITRE ATT&CK frameworks.
+                    </p>
+                </div>
+
+                <!-- Competency 2 -->
+                <div class="reveal-up delay-100 group">
+                    <div class="h-32 w-32 mb-8 mx-auto md:mx-0 relative">
+                        <svg class="w-full h-full svg-draw-ready" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Minimalist Lock / Defense Line Art -->
+                            <path class="line-art stroke-thick" d="M30,50 L70,50 L70,90 L30,90 Z M35,50 C35,20 65,20 65,50 M50,65 L50,75" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold mb-4 border-b border-brand-black pb-4 inline-block">Defensive Architecture</h3>
+                    <p class="text-brand-gray text-sm leading-relaxed">
+                        Zero-trust infrastructure design, SIEM deployments, and rigorous incident response playbooks for enterprise resilience.
+                    </p>
+                </div>
+
+                <!-- Competency 3 -->
+                <div class="reveal-up delay-200 group">
+                    <div class="h-32 w-32 mb-8 mx-auto md:mx-0 relative">
+                        <svg class="w-full h-full svg-draw-ready" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Minimalist DNA/Network Node Line Art -->
+                            <path class="line-art stroke-thick" d="M30,20 Q50,50 70,80 M70,20 Q50,50 30,80 M30,20 L70,20 M30,80 L70,80 M45,50 L55,50" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold mb-4 border-b border-brand-black pb-4 inline-block">R&D & Training</h3>
+                    <p class="text-brand-gray text-sm leading-relaxed">
+                        Forging the next generation of cyber experts through intensive masterclasses and applied research internships.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-32 bg-brand-gray/5 border-t border-brand-black/10">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20">
+                
+                <div class="reveal-up">
+                    <h2 class="text-4xl md:text-6xl font-serif font-bold mb-8">Initiate <br><span class="italic font-light">Dialogue.</span></h2>
+                    <p class="text-brand-gray mb-12 text-lg">
+                        Whether you are seeking robust security infrastructure, vulnerability auditing, or inquiring about our elite masterclass program, we are ready to architect your solution.
+                    </p>
+
+                    <div class="space-y-8 font-sans">
+                        
+                        <!-- Email Link -->
+                        <div class="flex items-start gap-6 group">
+                            <div class="w-12 h-12 flex items-center justify-center border border-brand-black rounded-full group-hover:bg-brand-black group-hover:text-brand-white transition-colors duration-300">
+                                <i class="fa-regular fa-envelope text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs font-bold uppercase tracking-widest text-brand-gray mb-1">Electronic Mail</h4>
+                                <a href="mailto:viditshringi@internshield.in" class="text-xl font-medium border-b border-transparent hover:border-brand-black transition-colors">
+                                    viditshringi@internshield.in
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Location -->
+                        <div class="flex items-start gap-6 group">
+                            <div class="w-12 h-12 flex items-center justify-center border border-brand-black rounded-full group-hover:bg-brand-black group-hover:text-brand-white transition-colors duration-300">
+                                <i class="fa-solid fa-location-crosshairs text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs font-bold uppercase tracking-widest text-brand-gray mb-1">Headquarters</h4>
+                                <p class="text-xl font-medium">
+                                    Jaipur, Rajasthan<br>
+                                    <span class="text-brand-gray text-base">India</span>
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="reveal-up delay-100 relative bg-brand-white p-12 border border-brand-black/10 shadow-2xl">
+                    <!-- One-Line Map/Location SVG abstract -->
+                    <svg class="absolute inset-0 w-full h-full opacity-5 pointer-events-none svg-draw-ready" viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                        <path class="line-art stroke-thick" d="M0,20 L40,40 L60,10 L100,30 M0,50 L40,70 L60,40 L100,60 M0,80 L40,100 L60,70 L100,90 M40,40 L40,100 M60,10 L60,70" />
+                    </svg>
+
+                    <h3 class="text-2xl font-serif font-bold mb-8 border-b border-brand-black pb-4">Secure Inquiry</h3>
+                    
+                    <form class="space-y-6 relative z-10" onsubmit="event.preventDefault(); alert('Message simulation sent. In production, connect to a backend.');">
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-widest text-brand-gray mb-2">Full Name</label>
+                            <input type="text" required class="w-full bg-transparent border-b border-brand-black/20 focus:border-brand-black py-3 outline-none transition-colors rounded-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-widest text-brand-gray mb-2">Entity / Organization</label>
+                            <input type="text" class="w-full bg-transparent border-b border-brand-black/20 focus:border-brand-black py-3 outline-none transition-colors rounded-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-widest text-brand-gray mb-2">Inquiry Details</label>
+                            <textarea required rows="4" class="w-full bg-transparent border-b border-brand-black/20 focus:border-brand-black py-3 outline-none transition-colors rounded-none resize-none"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-brand-black text-brand-white py-4 font-bold uppercase tracking-widest hover:bg-brand-gray transition-colors duration-300">
+                            Transmit Message
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-brand-black text-brand-white py-12 text-center border-t border-brand-white/10">
+        <div class="max-w-7xl mx-auto px-6">
+            <svg class="w-10 h-10 mx-auto mb-6 opacity-50" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path class="line-art stroke-thick" stroke="#ffffff" d="M50,10 C50,10 85,25 85,55 C85,80 50,95 50,95 C50,95 15,80 15,55 C15,25 50,10 50,10 Z" />
+            </svg>
+            <h3 class="font-serif text-2xl font-bold tracking-widest uppercase mb-2">InternShield</h3>
+            <p class="text-brand-gray text-xs tracking-widest uppercase mb-8">MSME Registered • Jaipur, Rajasthan, India</p>
+            
+            <div class="flex justify-center gap-6 mb-8 text-brand-gray">
+                <a href="#" class="hover:text-brand-white transition-colors"><i class="fa-brands fa-linkedin text-xl"></i></a>
+                <a href="#" class="hover:text-brand-white transition-colors"><i class="fa-brands fa-github text-xl"></i></a>
+                <a href="#" class="hover:text-brand-white transition-colors"><i class="fa-brands fa-x-twitter text-xl"></i></a>
+            </div>
+
+            <p class="text-[10px] text-brand-gray/50 uppercase tracking-widest border-t border-brand-white/10 pt-8 inline-block px-12">
+                &copy; <span id="year"></span> InternShield. Built by Vidit Shringi. All Rights Reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Core Interactive Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set current year in footer
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+            /* --- 1. Navbar Scroll Effect --- */
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('shadow-md', 'py-[-10px]');
+                } else {
+                    navbar.classList.remove('shadow-md', 'py-[-10px]');
+                }
+            });
+
+            /* --- 2. Mobile Menu Toggle --- */
+            const menuBtn = document.getElementById('mobile-menu-btn');
+            const closeBtn = document.getElementById('close-menu-btn');
+            const drawer = document.getElementById('mobile-drawer');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            function toggleMenu() {
+                const isClosed = drawer.classList.contains('translate-x-full');
+                if (isClosed) {
+                    drawer.classList.remove('translate-x-full');
+                    document.body.style.overflow = 'hidden'; // Prevent scrolling
+                } else {
+                    drawer.classList.add('translate-x-full');
+                    document.body.style.overflow = '';
+                }
+            }
+
+            menuBtn.addEventListener('click', toggleMenu);
+            closeBtn.addEventListener('click', toggleMenu);
+            mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
+
+
+            /* --- 3. Scroll Reveal & SVG Animation Trigger --- */
+            // We use Intersection Observer to trigger CSS animations when elements enter viewport
+            
+            // First, dynamically set the stroke-dasharray and dashoffset for all SVG paths 
+            // so they are exactly the length of the path (perfect for drawing effect)
+            const svgPaths = document.querySelectorAll('.svg-draw-ready path, .svg-draw-ready circle, .svg-draw-ready rect');
+            svgPaths.forEach(path => {
+                const length = path.getTotalLength();
+                // Set custom properties for CSS or set inline styles
+                path.style.strokeDasharray = length;
+                path.style.strokeDashoffset = length;
+            });
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -100px 0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Handle standard reveals (text, boxes)
+                        if (entry.target.classList.contains('reveal-up')) {
+                            entry.target.classList.add('is-visible');
+                        }
+                        
+                        // Handle SVG animations
+                        // Find any SVG inside this section that needs animating
+                        const svgs = entry.target.querySelectorAll('.svg-draw-ready');
+                        if (svgs.length > 0) {
+                            svgs.forEach(svg => svg.classList.add('svg-animate'));
+                        } else if (entry.target.classList.contains('svg-draw-ready')) {
+                            entry.target.classList.add('svg-animate');
+                        }
+                        
+                        // Optional: Unobserve after animating once
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all reveal elements
+            document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
+            
+            // Observe SVGs that aren't inside reveal-up containers
+            document.querySelectorAll('header .svg-draw-ready, section .svg-draw-ready').forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
