@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="InternShield intern portal — login, sign up, track your progress, submit tasks and access certificates.">
+<title>Intern Portal — InternShield</title>
+<style>
+:root{--navy:#07111f;--cyan:#00a9df;--green:#00b89c;--orange:#f28a45;--muted:#687887;--line:#dce6ec;--soft:#f6fafc}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;color:#172635;line-height:1.6;background:#fff}a{text-decoration:none;color:inherit}.wrap{width:min(1180px,calc(100% - 36px));margin:auto}header{position:sticky;top:0;z-index:20;background:#fffffff2;backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}.logo{height:60px;width:auto;display:block;object-fit:contain}.links{display:flex;gap:20px;font-size:11px;font-weight:900;letter-spacing:.06em}.links a:hover{color:var(--cyan)}.links a.on{color:var(--cyan)}.cta,.next,.submit{background:var(--navy);color:#fff;border:0;border-radius:999px;padding:11px 17px;font-weight:850;cursor:pointer}.outline{border:1px solid var(--line);border-radius:999px;padding:11px 17px;font-weight:800;display:inline-block;background:#fff;cursor:pointer}.menu{display:none;border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px}.kicker{font-size:11px;letter-spacing:.18em;font-weight:900;color:var(--cyan);text-transform:uppercase}h2{font-size:clamp(2.2rem,5vw,3.6rem);line-height:1.02;letter-spacing:-.05em;color:var(--navy);margin:12px 0}h3{color:var(--navy)}.intro{color:var(--muted);font-size:1.05rem;max-width:720px}section{padding:70px 0}.soft{background:var(--soft)}.card,.form,.linebox{background:#fff;border:1px solid var(--line);border-radius:22px;padding:26px;box-shadow:0 20px 60px #07111f10}.chip{border:1px solid var(--line);border-radius:999px;padding:7px 11px;font-size:11px;font-weight:850;display:inline-block}.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.field{margin:0 0 15px}.field label{display:block;font-size:11px;font-weight:850;margin-bottom:6px}input[type=text],input[type=number],input[type=email],input[type=tel],input[type=url],input[type=password],textarea,select{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;outline:0;font-family:inherit;font-size:14px}input:focus,textarea:focus,select:focus{border-color:var(--cyan);box-shadow:0 0 0 3px #00a9df16}textarea{resize:vertical;min-height:100px}.opts{display:flex;flex-wrap:wrap;gap:7px}.opt{border:1px solid var(--line);border-radius:11px;padding:9px 11px;font-size:12px;cursor:pointer}.footer{background:var(--navy);color:#fff;padding:55px 0}.foot{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:24px}.footer p,.footer a{color:#b9c5d0;font-size:13px}.footer h4{color:#fff;font-size:12px;letter-spacing:.1em;margin-bottom:8px}.footer .logo{filter:brightness(0) invert(1);margin-bottom:15px;height:70px}.copy{border-top:1px solid #ffffff1a;margin-top:35px;padding-top:18px;color:#93a2af;font-size:11px}.modal{display:none;position:fixed;inset:0;background:#07111fcc;z-index:40;place-items:center;padding:20px}.modal.open{display:grid}.modal img{max-width:95vw;max-height:90vh;background:#fff;border-radius:14px}.close{position:fixed;right:20px;top:20px;border:0;border-radius:50%;width:42px;height:42px;font-size:22px;background:#fff;cursor:pointer}
+.hero-mini{padding:60px 0 20px}
+.tabbar{display:flex;flex-wrap:wrap;gap:8px;margin:26px 0 8px}
+.tabbtn{border:1px solid var(--line);background:#fff;border-radius:999px;padding:10px 16px;font-weight:850;font-size:12px;cursor:pointer}
+.tabbtn.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.tabpanel{display:none;margin-top:26px}
+.tabpanel.on{display:block}
+.acc{border:1px solid var(--line);border-radius:16px;margin-bottom:10px;overflow:hidden;background:#fff}
+.acc summary{padding:16px 18px;font-weight:850;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary:after{content:'+';color:var(--cyan);font-weight:900;font-size:18px}
+.acc[open] summary:after{content:'−'}
+.acc .accbody{padding:0 18px 18px;color:var(--muted);font-size:14px}
+.pbar{height:10px;background:#e7eef2;border-radius:99px;overflow:hidden;margin:6px 0 16px}
+.pbar i{display:block;height:100%;background:var(--cyan);border-radius:99px}
+.badge-demo{display:inline-block;background:#fff4e9;color:#b45b16;border:1px solid #f3d9bd;font-size:11px;font-weight:850;padding:6px 12px;border-radius:999px;margin-bottom:16px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
+@media(max-width:900px){.links{display:none}.menu{display:block}.foot{grid-template-columns:1fr 1fr}.grid2,.grid3{grid-template-columns:1fr}}
+@media(max-width:520px){.wrap{width:calc(100% - 28px)}section{padding:52px 0}.foot{grid-template-columns:1fr}}
+
+.switcher{display:flex;gap:8px;margin-bottom:20px}
+.switchbtn{flex:1;border:1px solid var(--line);background:#fff;border-radius:12px;padding:12px;font-weight:850;cursor:pointer;text-align:center}
+.switchbtn.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.formpane{display:none}
+.formpane.on{display:block}
+.statcard{padding:18px;border-radius:16px;border:1px solid var(--line);background:#fff}
+.statnum{font-size:1.9rem;font-weight:900;color:var(--navy)}
+.statlabel{font-size:11px;color:var(--muted);font-weight:800;letter-spacing:.06em}
+.certgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
+.certgrid img{width:100%;border:1px solid var(--line);border-radius:14px;cursor:zoom-in;box-shadow:0 14px 40px #07111f10}
+
+</style>
+</head>
+<body>
+<script src="config.js"></script>
+<header><div class="wrap nav"><a href="index.html"><img src="logo.png" class="logo" alt="InternShield"></a><nav class="links"><a href="index.html#about">HOME</a><a href="index.html#offensive">DOMAINS</a><a href="trust-legal.html">VERIFY / LEGAL</a><a class="on" href="intern-portal.html">INTERN PORTAL</a><a href="growth.html">RESOURCES</a><a href="community.html">COMMUNITY</a></nav><a class="cta" href="index.html#interest">APPLY NOW</a><button class="menu" onclick="document.querySelector('.links').style.display=document.querySelector('.links').style.display==='flex'?'none':'flex'">☰</button></div></header><main>
+<section class="hero-mini wrap"><div class="kicker">Intern Portal</div><h2>Your account,<br>your progress.</h2><p class="intro">Sign up, track your learning progress, submit your tasks and access your certificates — all in one place. This programme, including the internship, is completely free.</p></section>
+
+<section class="wrap" style="padding-top:0">
+<div class="tabbar">
+<button class="tabbtn on" onclick="tab('auth')">LOGIN / SIGN UP</button>
+<button class="tabbtn" onclick="tab('dash')">DASHBOARD & PROGRESS</button>
+<button class="tabbtn" onclick="tab('task')">TASK SUBMISSION</button>
+<button class="tabbtn" onclick="tab('certs')">MY CERTIFICATES</button>
+</div>
+
+<div class="tabpanel on" id="tab-auth">
+<div class="card" style="max-width:520px">
+<div class="switcher">
+<button class="switchbtn on" onclick="pane('login')">LOGIN</button>
+<button class="switchbtn" onclick="pane('signup')">SIGN UP</button>
+</div>
+
+<div class="formpane on" id="pane-login">
+<div class="badge-demo">Account login requires backend integration — coming soon</div>
+<div class="field"><label>Email</label><input type="email" disabled placeholder="you@example.com"></div>
+<div class="field"><label>Password</label><input type="password" disabled placeholder="••••••••"></div>
+<button class="next" disabled style="opacity:.5;cursor:not-allowed">LOGIN (COMING SOON)</button>
+<p class="intro" style="font-size:12px;margin-top:10px">Already applied? We'll email your portal login once accounts go live.</p>
+</div>
+
+<div class="formpane" id="pane-signup">
+<p class="intro" style="font-size:13px">Create your interest profile now — our team will follow up by email once your intern account is ready.</p>
+<div class="field" style="margin-top:14px"><label>Full name *</label><input id="sname" type="text"></div>
+<div class="field"><label>Email *</label><input id="semail" type="email"></div>
+<div class="field"><label>Phone *</label><input id="sphone" type="tel"></div>
+<div class="field"><label>Preferred domain</label><select id="sdomain"><option>Offensive</option><option>Defensive</option><option>Forensic</option></select></div>
+<button class="next" onclick="signup()">SIGN UP</button>
+</div>
+</div>
+</div>
+
+<div class="tabpanel" id="tab-dash">
+<div class="badge-demo">SAMPLE PREVIEW — your real dashboard appears here once you're enrolled and logged in</div>
+<div class="grid3" style="margin-bottom:20px">
+<div class="statcard"><div class="statnum">62%</div><div class="statlabel">TASK COMPLETION</div></div>
+<div class="statcard"><div class="statnum">Module 5/8</div><div class="statlabel">CURRENT MODULE</div></div>
+<div class="statcard"><div class="statnum">18/20</div><div class="statlabel">ATTENDANCE DAYS</div></div>
+</div>
+<div class="card">
+<h3>Programme progress</h3>
+<p class="intro" style="font-size:12px;margin-bottom:4px">Defensive Security · Network Traffic Monitoring</p>
+<div class="pbar"><i style="width:62%"></i></div>
+<p class="intro" style="font-size:12px;margin-bottom:4px">Secure File Manager Project</p>
+<div class="pbar"><i style="width:40%"></i></div>
+<p class="intro" style="font-size:12px;margin-bottom:4px">Assessment & Review</p>
+<div class="pbar"><i style="width:10%"></i></div>
+<p class="intro" style="font-size:13px;margin-top:6px"><b>Upcoming deadline:</b> Task 6 submission — in 4 days</p>
+</div>
+</div>
+
+<div class="tabpanel" id="tab-task">
+<div class="card" style="max-width:640px">
+<h3>Submit a task / assignment</h3>
+<p class="intro" style="font-size:13px">Since file uploads aren't available yet on this static site, share your work as a link (Google Drive / GitHub) and our team will review it.</p>
+<div class="field" style="margin-top:16px"><label>Your name / Intern ID *</label><input id="tname" type="text" placeholder="Aryan Sharma / IS-ofe-0826-482913"></div>
+<div class="field"><label>Task / module title *</label><input id="ttitle" type="text"></div>
+<div class="field"><label>Work link (Drive / GitHub) *</label><input id="tlink" type="url" placeholder="https://"></div>
+<div class="field"><label>Notes</label><textarea id="tnotes"></textarea></div>
+<button class="next" onclick="submitTask()">SUBMIT TASK</button>
+</div>
+</div>
+
+<div class="tabpanel" id="tab-certs">
+<div class="card">
+<h3>My Certificates</h3>
+<p class="intro" style="font-size:13px">Once you complete the programme, your Letter of Recommendation, Project Completion Certificate and Certificate of Internship will appear here for download. Below are sample formats.</p>
+<div class="certgrid">
+<img src="samp_cert.png" alt="Certificate of Internship sample" onclick="openCert(this.src)">
+<img src="LR.png" alt="Letter of Recommendation sample" onclick="openCert(this.src)">
+<img src="pro-certi.png" alt="Project Completion Certificate sample" onclick="openCert(this.src)">
+</div>
+<a class="outline" style="margin-top:20px" href="mailto:info@internshield.in?subject=Certificate%20Request">REQUEST MY CERTIFICATE</a>
+</div>
+</div>
+</section>
+</main>
+<div class="modal" id="modal" onclick="closeCert()"><button class="close">×</button><img id="modalimg" alt="Certificate preview"></div><footer class="footer"><div class="wrap foot"><div><img src="logo.png" class="logo" alt="InternShield"><p>Your shield in the digital world.</p><p>Jaipur, Rajasthan · MSME Registered · UDYAM-RJ-09-0039019</p></div><div><h4>Explore</h4><p><a href="index.html#about">About</a></p><p><a href="index.html#offensive">Domains</a></p><p><a href="index.html#samples">Samples</a></p><p><a href="index.html#interest">Apply</a></p></div><div><h4>Platform</h4><p><a href="trust-legal.html#verify">Verify Certificate</a></p><p><a href="trust-legal.html#privacy">Privacy Policy</a></p><p><a href="intern-portal.html">Intern Portal</a></p><p><a href="growth.html#faq">FAQ</a></p></div><div><h4>Connect</h4><p><a href="https://www.instagram.com/internshield.in/" target="_blank" rel="noopener">Instagram</a></p><p><a href="https://github.com/internshield/" target="_blank" rel="noopener">GitHub</a></p><p><a href="https://www.linkedin.com/company/internshield.in" target="_blank" rel="noopener">LinkedIn</a></p><p><a href="mailto:info@internshield.in">info@internshield.in</a></p></div></div><div class="wrap copy">© 2026 InternShield · Learn · Practice · Defend.</div></footer><script>
+function tab(name){document.querySelectorAll('.tabbtn').forEach(b=>b.classList.remove('on'));document.querySelectorAll('.tabpanel').forEach(p=>p.classList.remove('on'));event.target.classList.add('on');document.getElementById('tab-'+name).classList.add('on')}
+function pane(name){document.querySelectorAll('.switchbtn').forEach(b=>b.classList.remove('on'));document.querySelectorAll('.formpane').forEach(p=>p.classList.remove('on'));event.target.classList.add('on');document.getElementById('pane-'+name).classList.add('on')}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}
+function signup(){
+const n=document.getElementById('sname').value.trim(),e=document.getElementById('semail').value.trim(),p=document.getElementById('sphone').value.trim(),d=document.getElementById('sdomain').value;
+if(!n||!e||!p){alert('Please complete all required fields.');return}
+const body='New Intern Portal Sign Up\n\nName: '+n+'\nEmail: '+e+'\nPhone: '+p+'\nPreferred Domain: '+d;
+sendToSheet('Signups',{'Name':n,'Email':e,'Phone':p,'Preferred Domain':d});
+window.location.href='mailto:info@internshield.in?subject='+encodeURIComponent('Intern Portal Sign Up — '+n)+'&body='+encodeURIComponent(body);
+}
+function submitTask(){
+const n=document.getElementById('tname').value.trim(),t=document.getElementById('ttitle').value.trim(),l=document.getElementById('tlink').value.trim(),notes=document.getElementById('tnotes').value.trim();
+if(!n||!t||!l){alert('Please fill in your name, task title and work link.');return}
+const body='Task Submission\n\nIntern: '+n+'\nTask: '+t+'\nLink: '+l+'\n\nNotes:\n'+notes;
+sendToSheet('Tasks',{'Intern':n,'Task':t,'Link':l,'Notes':notes});
+window.location.href='mailto:info@internshield.in?subject='+encodeURIComponent('Task Submission — '+t)+'&body='+encodeURIComponent(body);
+}
+function openCert(src){document.getElementById('modalimg').src=src;document.getElementById('modal').classList.add('open')}
+function closeCert(){document.getElementById('modal').classList.remove('open')}
+</script>
+</body></html>

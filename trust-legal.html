@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Verify InternShield certificates, and read our privacy policy, terms and contact details.">
+<title>Trust & Legal — InternShield</title>
+<style>
+:root{--navy:#07111f;--cyan:#00a9df;--green:#00b89c;--orange:#f28a45;--muted:#687887;--line:#dce6ec;--soft:#f6fafc}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;color:#172635;line-height:1.6;background:#fff}a{text-decoration:none;color:inherit}.wrap{width:min(1180px,calc(100% - 36px));margin:auto}header{position:sticky;top:0;z-index:20;background:#fffffff2;backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}.logo{height:60px;width:auto;display:block;object-fit:contain}.links{display:flex;gap:20px;font-size:11px;font-weight:900;letter-spacing:.06em}.links a:hover{color:var(--cyan)}.links a.on{color:var(--cyan)}.cta,.next,.submit{background:var(--navy);color:#fff;border:0;border-radius:999px;padding:11px 17px;font-weight:850;cursor:pointer}.outline{border:1px solid var(--line);border-radius:999px;padding:11px 17px;font-weight:800;display:inline-block;background:#fff;cursor:pointer}.menu{display:none;border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px}.kicker{font-size:11px;letter-spacing:.18em;font-weight:900;color:var(--cyan);text-transform:uppercase}h2{font-size:clamp(2.2rem,5vw,3.6rem);line-height:1.02;letter-spacing:-.05em;color:var(--navy);margin:12px 0}h3{color:var(--navy)}.intro{color:var(--muted);font-size:1.05rem;max-width:720px}section{padding:70px 0}.soft{background:var(--soft)}.card,.form,.linebox{background:#fff;border:1px solid var(--line);border-radius:22px;padding:26px;box-shadow:0 20px 60px #07111f10}.chip{border:1px solid var(--line);border-radius:999px;padding:7px 11px;font-size:11px;font-weight:850;display:inline-block}.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.field{margin:0 0 15px}.field label{display:block;font-size:11px;font-weight:850;margin-bottom:6px}input[type=text],input[type=number],input[type=email],input[type=tel],input[type=url],input[type=password],textarea,select{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;outline:0;font-family:inherit;font-size:14px}input:focus,textarea:focus,select:focus{border-color:var(--cyan);box-shadow:0 0 0 3px #00a9df16}textarea{resize:vertical;min-height:100px}.opts{display:flex;flex-wrap:wrap;gap:7px}.opt{border:1px solid var(--line);border-radius:11px;padding:9px 11px;font-size:12px;cursor:pointer}.footer{background:var(--navy);color:#fff;padding:55px 0}.foot{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:24px}.footer p,.footer a{color:#b9c5d0;font-size:13px}.footer h4{color:#fff;font-size:12px;letter-spacing:.1em;margin-bottom:8px}.footer .logo{filter:brightness(0) invert(1);margin-bottom:15px;height:70px}.copy{border-top:1px solid #ffffff1a;margin-top:35px;padding-top:18px;color:#93a2af;font-size:11px}.modal{display:none;position:fixed;inset:0;background:#07111fcc;z-index:40;place-items:center;padding:20px}.modal.open{display:grid}.modal img{max-width:95vw;max-height:90vh;background:#fff;border-radius:14px}.close{position:fixed;right:20px;top:20px;border:0;border-radius:50%;width:42px;height:42px;font-size:22px;background:#fff;cursor:pointer}
+.hero-mini{padding:60px 0 20px}
+.tabbar{display:flex;flex-wrap:wrap;gap:8px;margin:26px 0 8px}
+.tabbtn{border:1px solid var(--line);background:#fff;border-radius:999px;padding:10px 16px;font-weight:850;font-size:12px;cursor:pointer}
+.tabbtn.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.tabpanel{display:none;margin-top:26px}
+.tabpanel.on{display:block}
+.acc{border:1px solid var(--line);border-radius:16px;margin-bottom:10px;overflow:hidden;background:#fff}
+.acc summary{padding:16px 18px;font-weight:850;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary:after{content:'+';color:var(--cyan);font-weight:900;font-size:18px}
+.acc[open] summary:after{content:'−'}
+.acc .accbody{padding:0 18px 18px;color:var(--muted);font-size:14px}
+.pbar{height:10px;background:#e7eef2;border-radius:99px;overflow:hidden;margin:6px 0 16px}
+.pbar i{display:block;height:100%;background:var(--cyan);border-radius:99px}
+.badge-demo{display:inline-block;background:#fff4e9;color:#b45b16;border:1px solid #f3d9bd;font-size:11px;font-weight:850;padding:6px 12px;border-radius:999px;margin-bottom:16px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
+@media(max-width:900px){.links{display:none}.menu{display:block}.foot{grid-template-columns:1fr 1fr}.grid2,.grid3{grid-template-columns:1fr}}
+@media(max-width:520px){.wrap{width:calc(100% - 28px)}section{padding:52px 0}.foot{grid-template-columns:1fr}}
+
+.resultbox{margin-top:22px;padding:22px;border-radius:18px;border:1px solid var(--line);background:var(--soft)}
+.resultbox.found{border-color:#bfe9df;background:#f1fbf8}
+.resultbox.notfound{border-color:#f3d9bd;background:#fff8f0}
+.resrow{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed var(--line);font-size:13px}
+.resrow:last-child{border-bottom:0}
+.resrow b{color:var(--navy)}
+.status-ok{color:var(--green);font-weight:900}
+
+</style>
+</head>
+<body>
+<script src="config.js"></script>
+<header><div class="wrap nav"><a href="index.html"><img src="logo.png" class="logo" alt="InternShield"></a><nav class="links"><a href="index.html#about">HOME</a><a href="index.html#offensive">DOMAINS</a><a class="on" href="trust-legal.html">VERIFY / LEGAL</a><a href="intern-portal.html">INTERN PORTAL</a><a href="growth.html">RESOURCES</a><a href="community.html">COMMUNITY</a></nav><a class="cta" href="index.html#interest">APPLY NOW</a><button class="menu" onclick="document.querySelector('.links').style.display=document.querySelector('.links').style.display==='flex'?'none':'flex'">☰</button></div></header><main>
+<section class="hero-mini wrap"><div class="kicker">Trust & Legal</div><h2>Verify, and know<br>where you stand.</h2><p class="intro">Certificate verification, our privacy commitments, program terms, and how to reach us — all in one place.</p></section>
+
+<section class="wrap" style="padding-top:0">
+<div class="tabbar">
+<button class="tabbtn on" onclick="tab('verify')">CERTIFICATE VERIFICATION</button>
+<button class="tabbtn" onclick="tab('privacy')">PRIVACY POLICY</button>
+<button class="tabbtn" onclick="tab('terms')">TERMS & CONDITIONS</button>
+<button class="tabbtn" onclick="tab('contact')">CONTACT US</button>
+</div>
+
+<div class="tabpanel on" id="tab-verify">
+<div class="card" style="max-width:640px">
+<div class="badge-demo">DEMO MODE — sample records only, live database coming soon</div>
+<h3>Verify an InternShield Certificate</h3>
+<p class="intro" style="font-size:13px">Enter the Intern ID printed on the certificate (e.g. <b>IS-2026-000127</b>) to check its authenticity.</p>
+<div class="field" style="margin-top:16px"><label>Intern ID</label><input id="vid" type="text" placeholder="IS-2026-000127"></div>
+<button class="next" style="width:auto;padding:11px 24px" onclick="verify()">VERIFY</button>
+<div id="vresult"></div>
+</div>
+</div>
+
+<div class="tabpanel" id="tab-privacy">
+<div class="card" id="privacy">
+<h3>Privacy Policy</h3>
+<p class="intro" style="font-size:14px">InternShield ("we", "us") respects your privacy. This policy explains what information we collect through this website and how it is used.</p>
+<h4>Information we collect</h4>
+<p class="intro" style="font-size:14px">When you apply for the internship programme, we collect your name, age, gender, phone number, email address and your selected learning domain/areas. This is submitted directly by you through our interest form.</p>
+<h4>How we use it</h4>
+<p class="intro" style="font-size:14px">This information is used only to evaluate your application, communicate with you about the programme, and issue certificates/letters of recommendation upon successful completion. We do not sell or rent your personal data to third parties.</p>
+<h4>Data storage</h4>
+<p class="intro" style="font-size:14px">This website currently operates without a backend server. Application details are transmitted directly to our team via email and a private notification channel (ntfy.sh) at the time of submission — no data is stored on the website itself.</p>
+<h4>Cookies</h4>
+<p class="intro" style="font-size:14px">This site does not use tracking cookies or third-party advertising scripts.</p>
+<h4>Your rights</h4>
+<p class="intro" style="font-size:14px">You may request access to, correction of, or deletion of your submitted information at any time by writing to <a href="mailto:info@internshield.in" style="color:var(--cyan)">info@internshield.in</a>.</p>
+<h4>Changes to this policy</h4>
+<p class="intro" style="font-size:14px">We may update this policy as the platform grows. The latest version will always be available on this page.</p>
+</div>
+</div>
+
+<div class="tabpanel" id="tab-terms">
+<div class="card" id="terms">
+<h3>Terms & Conditions</h3>
+<h4>1. Free programme</h4>
+<p class="intro" style="font-size:14px">InternShield's learning content and internship programme are completely free of cost. We do not charge any fee for enrolment, learning material, mentorship or certification.</p>
+<h4>2. Eligibility</h4>
+<p class="intro" style="font-size:14px">Applicants should have a genuine interest in cybersecurity. There is no strict academic prerequisite, but a basic understanding of computers is helpful.</p>
+<h4>3. Code of conduct</h4>
+<p class="intro" style="font-size:14px">All learning and practice must be carried out ethically and legally. Any misuse of skills taught (unauthorized hacking, data theft, etc.) is strictly against our values and may result in removal from the programme.</p>
+<h4>4. Project ownership</h4>
+<p class="intro" style="font-size:14px">Projects built during the internship remain the intern's own work for portfolio purposes. InternShield may showcase anonymised project summaries for promotional use unless the intern opts out.</p>
+<h4>5. Certificates</h4>
+<p class="intro" style="font-size:14px">Certificates, Letters of Recommendation and Project Completion certificates are issued only after successful completion of the assigned modules/tasks, at InternShield's discretion.</p>
+<h4>6. No placement guarantee</h4>
+<p class="intro" style="font-size:14px">While we aim to build practical, job-relevant skills, InternShield does not guarantee employment or placement after completion of the internship.</p>
+<h4>7. Changes</h4>
+<p class="intro" style="font-size:14px">These terms may be revised from time to time. Continued use of the programme implies acceptance of the latest terms.</p>
+</div>
+</div>
+
+<div class="tabpanel" id="tab-contact">
+<div class="grid2">
+<div class="card">
+<h3>Get in touch</h3>
+<p class="intro" style="font-size:13px">Have a question about the programme, a domain, or a certificate? Send us a message.</p>
+<div class="field" style="margin-top:16px"><label>Name</label><input id="cname" type="text"></div>
+<div class="field"><label>Email</label><input id="cemail" type="email"></div>
+<div class="field"><label>Message</label><textarea id="cmsg"></textarea></div>
+<button class="next" style="width:auto;padding:11px 24px" onclick="sendContact()">SEND MESSAGE</button>
+</div>
+<div class="card">
+<h3>Reach us directly</h3>
+<p class="intro" style="font-size:13px">Jaipur, Rajasthan, India</p>
+<div class="chips">
+<span class="chip">info@internshield.in</span>
+<span class="chip">MSME Registered</span>
+<span class="chip">UDYAM-RJ-09-0039019</span>
+</div>
+<div style="margin-top:20px">
+<p><a href="https://www.instagram.com/internshield.in/" target="_blank" rel="noopener" style="color:var(--cyan);font-weight:800">Instagram →</a></p>
+<p><a href="https://github.com/internshield/" target="_blank" rel="noopener" style="color:var(--cyan);font-weight:800">GitHub →</a></p>
+<p><a href="https://www.linkedin.com/company/internshield.in" target="_blank" rel="noopener" style="color:var(--cyan);font-weight:800">LinkedIn →</a></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main><footer class="footer"><div class="wrap foot"><div><img src="logo.png" class="logo" alt="InternShield"><p>Your shield in the digital world.</p><p>Jaipur, Rajasthan · MSME Registered · UDYAM-RJ-09-0039019</p></div><div><h4>Explore</h4><p><a href="index.html#about">About</a></p><p><a href="index.html#offensive">Domains</a></p><p><a href="index.html#samples">Samples</a></p><p><a href="index.html#interest">Apply</a></p></div><div><h4>Platform</h4><p><a href="trust-legal.html#verify">Verify Certificate</a></p><p><a href="trust-legal.html#privacy">Privacy Policy</a></p><p><a href="trust-legal.html#terms">Terms & Conditions</a></p><p><a href="intern-portal.html">Intern Portal</a></p></div><div><h4>Connect</h4><p><a href="https://www.instagram.com/internshield.in/" target="_blank" rel="noopener">Instagram</a></p><p><a href="https://github.com/internshield/" target="_blank" rel="noopener">GitHub</a></p><p><a href="https://www.linkedin.com/company/internshield.in" target="_blank" rel="noopener">LinkedIn</a></p><p><a href="mailto:info@internshield.in">info@internshield.in</a></p></div></div><div class="wrap copy">© 2026 InternShield · Learn · Practice · Defend.</div></footer><script>
+function tab(name){document.querySelectorAll('.tabbtn').forEach(b=>b.classList.remove('on'));document.querySelectorAll('.tabpanel').forEach(p=>p.classList.remove('on'));event.target.classList.add('on');document.getElementById('tab-'+name).classList.add('on');history.replaceState(null,'','#'+name)}
+(function(){const h=location.hash.replace('#','');if(h&&document.getElementById('tab-'+h)){document.querySelectorAll('.tabbtn').forEach(b=>b.classList.remove('on'));document.querySelectorAll('.tabpanel').forEach(p=>p.classList.remove('on'));const idx={verify:0,privacy:1,terms:2,contact:3}[h];if(idx!==undefined){document.querySelectorAll('.tabbtn')[idx].classList.add('on');document.getElementById('tab-'+h).classList.add('on')}}})();
+
+const demoRecords={
+'IS-2026-000127':{name:'Aryan Sharma',domain:'Defensive Security / Offensive Security',project:'Secure File Manager',duration:'01 May 2026 - 26 June 2026',status:'Certified'}
+};
+function verify(){
+const id=document.getElementById('vid').value.trim();
+const box=document.getElementById('vresult');
+if(!id){box.innerHTML='';return}
+const r=demoRecords[id];
+if(r){
+box.innerHTML='<div class="resultbox found"><div class="resrow"><span>Intern ID</span><b>'+id+'</b></div><div class="resrow"><span>Name</span><b>'+r.name+'</b></div><div class="resrow"><span>Domain</span><b>'+r.domain+'</b></div><div class="resrow"><span>Project</span><b>'+r.project+'</b></div><div class="resrow"><span>Duration</span><b>'+r.duration+'</b></div><div class="resrow"><span>Status</span><span class="status-ok">✓ '+r.status+'</span></div></div>';
+}else{
+box.innerHTML='<div class="resultbox notfound"><p style="margin:0;color:var(--muted);font-size:13px">No record found for <b>'+id+'</b> in the demo dataset. Once our verification database goes live, all issued certificates will be checkable here.</p></div>';
+}
+}
+function sendContact(){
+const n=document.getElementById('cname').value.trim(),e=document.getElementById('cemail').value.trim(),m=document.getElementById('cmsg').value.trim();
+if(!n||!e||!m){alert('Please fill in your name, email and message.');return}
+const body='Name: '+n+'\nEmail: '+e+'\n\nMessage:\n'+m;
+sendToSheet('Contact',{'Name':n,'Email':e,'Message':m});
+window.location.href='mailto:info@internshield.in?subject='+encodeURIComponent('Website Contact — '+n)+'&body='+encodeURIComponent(body);
+}
+</script>
+</body></html>
