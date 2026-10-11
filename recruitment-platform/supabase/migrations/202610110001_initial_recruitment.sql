@@ -92,7 +92,6 @@ create policy profile_admin_all on public.profiles for all to authenticated usin
 
 create policy company_select_approved_owner on public.companies for select to anon,authenticated using(review_status='approved' or owner_id=(select auth.uid()) or (select private.is_admin()));
 create policy company_create_request on public.companies for insert to authenticated with check(owner_id=(select auth.uid()) and review_status='pending' and (select private.current_role())='student');
-create policy company_update_owner on public.companies for update to authenticated using(owner_id=(select auth.uid()) and review_status<>'rejected') with check(owner_id=(select auth.uid()) and review_status<>'rejected');
 create policy company_admin_all on public.companies for all to authenticated using((select private.is_admin())) with check((select private.is_admin()));
 
 create policy opportunity_read_published_owner on public.opportunities for select to anon,authenticated using(status='published' or (select private.owns_company(company_id)) or (select private.is_admin()));
@@ -117,7 +116,8 @@ grant select on public.companies,public.opportunities to anon,authenticated;
 grant select,update on public.profiles to authenticated;
 grant insert,update on public.companies to authenticated;
 grant select,insert,update,delete on public.opportunities to authenticated;
-grant select,insert,update on public.applications to authenticated;
+grant select,insert on public.applications to authenticated;
+grant update(status,recruiter_notes,status_updated_at,updated_at) on public.applications to authenticated;
 grant select on public.audit_events to authenticated;
 
 -- Bootstrap an admin only after creating the intended account and verifying its UUID:
