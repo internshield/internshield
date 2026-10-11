@@ -1,54 +1,105 @@
 # InternShield Recruitment Platform
 
-An additive recruitment workspace. It lives in its own directory so the existing public website and member/student portals are not overwritten.
+An additive recruitment platform and backend workspace. It lives under `recruitment-platform/` so the existing InternShield website and portals are not overwritten.
 
-**Design:** Premium dark Liquid Glass UI  
-**Stack:** Next.js, TypeScript, Supabase Auth, PostgreSQL, Row Level Security  
-**Initial release:** Public opportunity discovery, email/password sign-up and sign-in, student applications, and an application dashboard.
+**Database:** Neon PostgreSQL  
+**API:** Next.js Route Handlers + TypeScript  
+**Validation:** Zod  
+**Authentication:** bcrypt password hashes + signed short-lived JWT access tokens  
+**Hosting direction:** Cloudflare-compatible deployment, with the exact runtime confirmed before production deployment.
+
+## Current implementation phase
+
+The Neon database schema and API are being built and verified first. Do not connect the existing production portals, change their URLs, or import live records until database and API tests pass and the migration plan is approved.
+
+This repository's visual recruitment UI began as a Supabase-backed scaffold. The current API endpoints use Neon, but the UI has not yet been migrated from its temporary Supabase client. Do not deploy this as a finished, connected production application yet. The next phase will switch the new recruitment UI to the Neon API after the backend has been tested.
+
+## API endpoints
+
+| Method | Endpoint | Access | Purpose |
+| --- | --- | --- | --- |
+| GET | `/api/health` | Public | API and database connectivity check |
+| POST | `/api/auth/register` | Public | Register a student account |
+| POST | `/api/auth/login` | Public | Authenticate and receive a short-lived access token |
+| GET | `/api/opportunities` | Public | List published opportunities from approved companies |
+| POST | `/api/opportunities` | Recruiter/admin token | Create a draft opportunity |
+| GET | `/api/applications` | Student token | List the signed-in student's applications |
+| POST | `/api/applications` | Student token | Submit an application; duplicate applications are rejected |
+| PATCH | `/api/admin/applications/:id` | Admin token | Change application status and record an audit event |
+
+Requests with authentication must include `Authorization: Bearer <accessToken>`. Tokens currently expire after two hours. The API never returns password hashes.
+
+## Database schema
+
+The migration at `neon/migrations/0001_initial.sql` creates a dedicated recruitment schema containing:
+
+- `users`: student, recruiter, and admin accounts
+- `companies`: employer profiles and review status
+- `opportunities`: internship/job listings
+- `applications`: applications, statuses and recruiter notes
+- `interviews`: interview scheduling data
+- `audit_events`: administrative change history
+
+Constraints and indexes support unique account emails, one application per student per opportunity, status validation, search/list queries, and audit lookups.
 
 ## Local setup
 
-1. Install Node.js 20.9+ and npm.
-2. Create a Supabase project for this recruitment platform. Review the SQL migration before running it against any production database.
-3. In Supabase SQL Editor, review and run supabase/migrations/202610110001_initial_recruitment.sql.
-4. Copy .env.example to .env.local and set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY.
-5. Run npm install, then npm run dev from this directory.
-6. Open http://localhost:3000.
+1. Install Node.js 20+ and npm.
+2. Create a **new, dedicated Neon project/database** for recruitment. Do not assume the existing intern-registration spreadsheet is the recruitment database.
+3. In Neon, copy the pooled connection string and place it in `DATABASE_URL` in a local `.env.local`. Keep the password private.
+4. Generate a unique secret and set `AUTH_SECRET` (at least 32 characters). Do not commit `.env.local`.
+5. Review `neon/migrations/0001_initial.sql` and run it against the new, empty Neon database using the Neon SQL Editor.
+6. Run `npm install`, then `npm run typecheck`, `npm run build`, and `npm run dev`.
+7. Open `http://localhost:3000/api/health`. It should return HTTP 200 with `database: "connected"` after the database and secrets are configured.
 
-Never put a Supabase service-role key in browser code, a NEXT_PUBLIC variable, or Git.
+Example registration request:
 
-## Deployment
+```bash
+curl -X POST http://localhost:3000/api/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"fullName":"Example Student","email":"student@example.com","password":"use-a-unique-long-password"}'
+```
 
-Create a separate hosting project connected to this GitHub repository and set its Root Directory to recruitment-platform. Add the two environment variables in hosting settings, deploy, then connect a subdomain such as careers.internshield.in through the host's domain settings and DNS panel.
+Use a test email and password only. Never paste production credentials into issues, chats, source files, or screenshots.
 
-Keep internshield.in, intern.internshield.in, and member.internshield.in unchanged during rollout. The new recruitment app can be deployed independently and connected to the existing portals after testing.
+## Initial admin bootstrap
 
-## First administrator and company review
+Public registration can create student accounts only. It cannot choose a privileged role. After creating a verified test account, promote the intended administrator manually from Neon SQL Editor only after confirming that account's ID:
 
-Create an account, find its UUID in Supabase Auth, and use SQL Editor to assign its profile role to admin. The migration includes a commented bootstrap statement. Never allow signup metadata or a public form to assign the admin role. Public sign-ups are student accounts. A trusted admin must review companies before their opportunities can be published.
+```sql
+UPDATE users SET role = 'admin' WHERE id = 'VERIFIED-USER-UUID';
+```
 
-## Included
+Do not expose admin promotion through a public API. Add an auditable, authenticated admin-management workflow before onboarding production administrators.
 
-- Responsive Liquid Glass homepage
-- Live published opportunity listing, search, and domain filters
-- Supabase email/password authentication
-- Student application submission with duplicate protection
-- Dashboard with application status
-- Database constraints, indexes, and row-level security policies
+## Verification checklist
 
-## Next increments before public launch
+- [ ] Apply migration to a new Neon database and confirm all tables, indexes, enums and triggers exist.
+- [ ] `GET /api/health` returns HTTP 200 and reports a database connection.
+- [ ] Register a student; confirm the stored password is a bcrypt hash, not plaintext.
+- [ ] Duplicate registration returns HTTP 409.
+- [ ] Login with correct credentials returns a token; incorrect credentials return HTTP 401.
+- [ ] Public opportunities list returns only published listings for approved companies.
+- [ ] Unauthenticated application requests return HTTP 401.
+- [ ] A student can apply once to an open opportunity; duplicate application returns HTTP 409.
+- [ ] A student token cannot call the admin status endpoint.
+- [ ] Admin status changes create audit events.
+- [ ] Run `npm run typecheck` and `npm run build`; inspect GitHub Actions CI result.
 
-- Company onboarding and admin review UI
-- Recruiter workspace for publishing roles and managing applicants
-- Private resume uploads with Storage policies
-- Password reset, transactional email, abuse prevention and monitoring
-- End-to-end tests, accessibility review, dependency audit, and RLS security review
-- Controlled migration from the existing Google Sheets / Apps Script setup, including field mapping, duplicate handling, reconciliation, consent, and rollback
+The GitHub Actions workflow checks TypeScript and builds the app. A green build is not a substitute for integration tests against a real staging database.
 
-## Existing InternShield data
+## Cloudflare and domain
 
-This app does not import or modify existing Google Sheets records. Keep the existing one-tab source of truth and Apps Script integrations running until migration has been tested on a copy and reconciled. Switch the source of truth only after explicit approval and a controlled migration.
+Keep the GoDaddy domain registration and current Cloudflare DNS configuration unchanged. Database hosting is independent of domain registration. Before deployment, confirm whether the selected Cloudflare hosting product supports this Next.js Node.js runtime and the Neon serverless driver. If using Cloudflare Pages/Workers, use a compatible adapter/runtime and verify the deployed health endpoint before adding any custom domain. Do not switch existing production DNS records as part of backend development.
 
-## Security
+## Data protection and migration
 
-The migration enables RLS on public tables, does not assign privileged roles from signup metadata, and uses database policies to enforce row access. Browser code uses only the publishable/anon key. Review policies in staging and complete an independent security review before using real candidate data.
+- Existing Google Sheets and Apps Script integrations remain untouched during this phase.
+- Do not import the intern-registration workbook until the actual recruitment data source and its field mappings are identified.
+- Start with synthetic test records or a copy of the confirmed recruitment dataset.
+- Preserve original IDs where appropriate, deduplicate only by an agreed rule, reconcile row counts and key fields, and retain a rollback/export path.
+- Do not switch a portal's source of truth until functional tests, access-control tests, and reconciliation pass.
+
+## Security and production gaps
+
+Before real candidate data is used, add rate limiting and abuse controls, email verification/password reset, refresh/revocation strategy, request-origin/CORS policy for the eventual portal domains, recruiter/company ownership checks, private resume storage, and integration tests. Do not store access tokens in insecure browser storage when connecting the frontend. The initial endpoints are a development baseline and need a security review before public launch.
