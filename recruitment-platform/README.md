@@ -22,7 +22,10 @@ This repository's visual recruitment UI began as a Supabase-backed scaffold. The
 | POST | `/api/auth/register` | Public | Register a student account |
 | POST | `/api/auth/login` | Public | Authenticate and receive a short-lived access token |
 | GET | `/api/opportunities` | Public | List published opportunities from approved companies |
-| POST | `/api/opportunities` | Recruiter/admin token | Create a draft opportunity |
+| POST | `/api/companies` | Recruiter/admin token | Submit a company profile for admin review |
+| GET | `/api/admin/companies?status=pending` | Admin token | View the company review queue |
+| PATCH | `/api/admin/companies/:id` | Admin token | Approve, reject, or suspend a company |
+| POST | `/api/opportunities` | Recruiter/admin token | Create a draft opportunity for an approved company owned by the recruiter (admins can manage any approved company) |
 | GET | `/api/applications` | Student token | List the signed-in student's applications |
 | POST | `/api/applications` | Student token | Submit an application; duplicate applications are rejected |
 | PATCH | `/api/admin/applications/:id` | Admin token | Change application status and record an audit event |
