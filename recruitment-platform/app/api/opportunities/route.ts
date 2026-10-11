@@ -59,8 +59,10 @@ export async function POST(request: NextRequest) {
       return apiError("Maximum stipend must be greater than or equal to minimum stipend.", 422);
     }
     const sql = getSql();
-    const companyRows = await sql`select id from companies where id = ${body.companyId} and status = 'approved' limit 1`;
-    if (!companyRows.length) return apiError("Approved company not found.", 404);
+    const companyRows = actor.role === "admin"
+      ? await sql`select id from companies where id = ${body.companyId} and status = 'approved' limit 1`
+      : await sql`select id from companies where id = ${body.companyId} and owner_id = ${actor.id} and status = 'approved' limit 1`;
+    if (!companyRows.length) return apiError("Approved company not found or not owned by this account.", 404);
     const rows = await sql`
       insert into opportunities (
         company_id, title, description, domain, location, work_mode, internship_type,
