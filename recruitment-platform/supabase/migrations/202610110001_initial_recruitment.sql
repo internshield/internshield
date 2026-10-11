@@ -64,8 +64,8 @@ as $$ select exists(select 1 from public.companies c where c.id=cid and c.owner_
 create or replace function private.owns_approved_company(cid uuid) returns boolean language sql stable security definer set search_path=''
 as $$ select exists(select 1 from public.companies c where c.id=cid and c.owner_id=(select auth.uid()) and c.review_status='approved') $$;
 revoke all on schema private from public,anon;
-grant usage on schema private to authenticated;
-grant execute on function private.is_admin(),private.current_role(),private.owns_company(uuid),private.owns_approved_company(uuid) to authenticated;
+grant usage on schema private to anon,authenticated;
+grant execute on function private.is_admin(),private.current_role(),private.owns_company(uuid),private.owns_approved_company(uuid) to anon,authenticated;
 
 create or replace function public.set_updated_at() returns trigger language plpgsql set search_path=''
 as $$ begin new.updated_at=now(); return new; end $$;
